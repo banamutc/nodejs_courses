@@ -1,0 +1,45 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="http://localhost:8080/v1/">Home</a>
+        <a href="/v1/create">Create User</a>
+    </div>
+
+    <div class="form-add-new">
+        <form action="/v1/update-user/<%= users.id %>" method="POST">
+            <fieldset>
+                <legend>Sua Thong Tin User</legend>
+                <div class="input-group">
+                    <label>ID:</label>
+                    <input type="text" id="id" value="<%= users.id %>" name="id" readonly>
+                </div>
+                <div class="input-group">
+                    <label>Email:</label>
+                    <input type="text" id="emailId" value="<%= users.email %>" name="email">
+                </div>
+                <div class="input-group">
+                    <label>Name:</label>
+                    <input type="text" value="<%= users.name %>" name="name">
+                </div>
+                <div class="input-group">
+                    <label>City:</label>
+                    <input type="text" value="<%= users.city %>" name="city">
+                </div>
+                <!-- <input type="submit" value="Submit"> -->
+                <div>
+                    <button>Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>

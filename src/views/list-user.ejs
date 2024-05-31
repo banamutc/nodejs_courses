@@ -1,0 +1,123 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .table-contaier {
+            padding: 15px 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    <script>
+        function confirmDeletion(event) {
+            // Ngăn chặn form gửi ngay lập tức
+            event.preventDefault();
+
+            // Hiển thị hộp thoại xác nhận
+            var userConfirmed = confirm("Bạn có chắc chắn muốn xóa người dùng này không?");
+
+            // Nếu người dùng nhấn "OK", gửi form
+            if (userConfirmed) {
+                event.target.submit();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="http://localhost:8080/v1/">Home</a>
+        <a href="/v1/create">Create User</a>
+        <a href="/v1/list-user" class="active">List User</a>
+        <a href="#about">About</a>
+    </div>
+
+    <div class="table-container">
+        <!-- <%= JSON.stringify(listUser) %> -->
+        <div class="title">List User Information</div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Action</th>
+            </tr>
+
+            <!-- <% for(let i=0; i < listUser.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= listUser[i].id %>
+                    </td>
+                    <td>
+                        <%= listUser[i].email %>
+                    </td>
+                    <td>
+                        <%= listUser[i].name %>
+                    </td>
+                    <td>
+                        <%= listUser[i].city %>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <% } %> -->
+
+            <% listUser.forEach(function(user) { %>
+                <tr>
+                    <td>
+                        <%= user.id %>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                    <td>
+                        <%= user.name %>
+                    </td>
+                    <td>
+                        <%= user.city %>
+                    </td>
+                    <td>
+                        <a href="/v1/update/<%= user.id %>">Edit</a>
+                        <!-- <a href="/v1/delete/<%= user.id %>">Delete</a> -->
+                        <form action="/v1/delete-user/<%= user.id %>" method="POST" style="display: inline;"
+                            onsubmit="confirmDeletion(event)">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+    </div>
+</body>
+
+</html>
